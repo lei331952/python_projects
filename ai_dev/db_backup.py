@@ -10,6 +10,12 @@ logging.basicConfig(level=logging.INFO)
 
 
 def backup_db(active_db_file: str, backup_db_file: str) -> None:
+    """
+    Backs up the active database file to a backup file.
+
+    :param active_db_file: Path to the active database file.
+    :param backup_db_file: Path to the backup database file.
+    """
     try:
         if not os.path.isfile(active_db_file):
             logging.error(f"Active database file does not exist: {
@@ -19,7 +25,7 @@ def backup_db(active_db_file: str, backup_db_file: str) -> None:
         shutil.copy(active_db_file, backup_db_file)
         logging.info(f"Backed up {active_db_file} to {backup_db_file}")
     except shutil.SameFileError:
-        logging.error("Source and destination represents the same file.")
+        logging.error("Source and destination represent the same file.")
     except IsADirectoryError:
         logging.error("Destination is a directory.")
     except PermissionError:
@@ -29,6 +35,12 @@ def backup_db(active_db_file: str, backup_db_file: str) -> None:
 
 
 def restore_db(backup_db_file: str, active_db_file: str) -> None:
+    """
+    Restores the active database file from a backup file.
+
+    :param backup_db_file: Path to the backup database file.
+    :param active_db_file: Path to the active database file.
+    """
     try:
         if not os.path.isfile(backup_db_file):
             logging.error(f"Backup database file does not exist: {
@@ -38,7 +50,7 @@ def restore_db(backup_db_file: str, active_db_file: str) -> None:
         shutil.copy(backup_db_file, active_db_file)
         logging.info(f"Restored {backup_db_file} as {active_db_file}")
     except shutil.SameFileError:
-        logging.error("Source and destination represents the same file.")
+        logging.error("Source and destination represent the same file.")
     except IsADirectoryError:
         logging.error("Destination is a directory.")
     except PermissionError:
@@ -48,6 +60,9 @@ def restore_db(backup_db_file: str, active_db_file: str) -> None:
 
 
 def main():
+    """
+    Main function to provide a menu for backing up and restoring the database.
+    """
     print("1. Backup DB")
     print("2. Restore DB")
     print("3. Exit")
