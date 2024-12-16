@@ -1,6 +1,6 @@
+import os
 import shutil
 import logging
-import os
 
 active_db_file = 'ai_dev/app.db'
 backup_db_file = 'ai_dev/backup.db'
